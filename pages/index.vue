@@ -11,12 +11,12 @@
                 </div>
 
                 <!-- menu -->
-                <div class="flex flex-col p-2">
+                <div class="flex flex-col h-auto p-2">
                     <div class="p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
                         <i class='bx bxs-dashboard' ></i>
                         <span class="text-base ml-4 text-black">Dashboard</span>
                     </div>
-                    <div class="p-3 m-2 flex flex-col rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                    <div @click="itemDropDownMenuSidebar == 'management' ? openDropDownMenuSidebar = !openDropDownMenuSidebar : itemDropDownMenuSidebar = 'management', openDropDownMenuSidebar = true" class="p-3 m-2 flex flex-col rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
                         <div class="flex flex-row items-center">
                             <i class='bx bxs-chevron-right'></i>
                             <div class="flex justify-between w-full items-center">
@@ -24,11 +24,29 @@
                                 <i class='bx bxs-chevron-up'></i>
                             </div>
                         </div>
-                        <div class="mt-4 mr-2 mb-2 ml-3 pl-2">
-                            <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">User</h1>
-                            <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Role</h1>
-                            <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Permission</h1>
+                        <template v-if="itemDropDownMenuSidebar == 'management'">
+                            <div :class="{ 'hidden': !openDropDownMenuSidebar, '': openDropDownMenuSidebar}" class="mt-4 mr-2 mb-2 ml-3 pl-2">
+                                <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">User</h1>
+                                <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Role</h1>
+                                <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Permission</h1>
+                            </div>
+                        </template>
+                    </div>
+                    <div @click="itemDropDownMenuSidebar == 'system' ? openDropDownMenuSidebar = !openDropDownMenuSidebar : itemDropDownMenuSidebar = 'system', openDropDownMenuSidebar = true" class="p-3 m-2 flex flex-col rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                        <div class="flex flex-row items-center">
+                            <i class='bx bxs-chevron-right'></i>
+                            <div class="flex justify-between w-full items-center">
+                                <span class="text-base ml-4 text-black">System</span>
+                                <i class='bx bxs-chevron-up'></i>
+                            </div>
                         </div>
+                        <template v-if="itemDropDownMenuSidebar == 'system'">
+                            <div :class="{ 'hidden': !openDropDownMenuSidebar, '': openDropDownMenuSidebar}" class="mt-4 mr-2 mb-2 ml-3 pl-2">
+                                <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">User</h1>
+                                <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Role</h1>
+                                <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Permission</h1>
+                            </div>
+                        </template>
                     </div>
                 </div>
                 <!-- menu -->
@@ -93,8 +111,10 @@
 </template>
 
 <script setup>
-const openDrawer = ref(false)
+const openDrawer = ref(true)
 const openDropdownMenuNavbar = ref(false)
+const itemDropDownMenuSidebar = ref("no")
+const openDropDownMenuSidebar = ref(false)
 </script>
 
 <style scoped>
