@@ -16,7 +16,7 @@
                         <i class='bx bxs-dashboard' ></i>
                         <span class="text-base ml-4 text-black">Dashboard</span>
                     </div>
-                    <div @click="itemDropDownMenuSidebar == 'management' ? openDropDownMenuSidebar = !openDropDownMenuSidebar : itemDropDownMenuSidebar = 'management', openDropDownMenuSidebar = true" class="p-3 m-2 flex flex-col rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                    <div @click="openDropDownMenuSidebar('management')" class="p-3 m-2 flex flex-col rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
                         <div class="flex flex-row items-center">
                             <i class='bx bxs-chevron-right'></i>
                             <div class="flex justify-between w-full items-center">
@@ -25,23 +25,25 @@
                             </div>
                         </div>
                         <template v-if="itemDropDownMenuSidebar == 'management'">
-                            <div :class="{ 'hidden': !openDropDownMenuSidebar, '': openDropDownMenuSidebar}" class="mt-4 mr-2 mb-2 ml-3 pl-2">
+                            <div :class="{ 'hidden': !dropDownMenuSidebar, '': dropDownMenuSidebar}" class="mt-4 mr-2 mb-2 ml-3 pl-2">
                                 <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">User</h1>
                                 <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Role</h1>
                                 <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Permission</h1>
                             </div>
                         </template>
                     </div>
-                    <div @click="itemDropDownMenuSidebar == 'system' ? openDropDownMenuSidebar = !openDropDownMenuSidebar : itemDropDownMenuSidebar = 'system', openDropDownMenuSidebar = true" class="p-3 m-2 flex flex-col rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                    <div @click="openDropDownMenuSidebar('system')" class="p-3 m-2 flex flex-col rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
                         <div class="flex flex-row items-center">
                             <i class='bx bxs-chevron-right'></i>
                             <div class="flex justify-between w-full items-center">
                                 <span class="text-base ml-4 text-black">System</span>
-                                <i class='bx bxs-chevron-up'></i>
+                                <span :class="{ 'rotate-0': !dropDownMenuSidebar, 'rotate-180': dropDownMenuSidebar}">
+                                    <i class='bx bxs-chevron-up'></i>
+                                </span>
                             </div>
                         </div>
                         <template v-if="itemDropDownMenuSidebar == 'system'">
-                            <div :class="{ 'hidden': !openDropDownMenuSidebar, '': openDropDownMenuSidebar}" class="mt-4 mr-2 mb-2 ml-3 pl-2">
+                            <div :class="{ 'hidden': !dropDownMenuSidebar, '': dropDownMenuSidebar}" class="mt-4 mr-2 mb-2 ml-3 pl-2">
                                 <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">User</h1>
                                 <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Role</h1>
                                 <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Permission</h1>
@@ -113,8 +115,17 @@
 <script setup>
 const openDrawer = ref(true)
 const openDropdownMenuNavbar = ref(false)
-const itemDropDownMenuSidebar = ref("no")
-const openDropDownMenuSidebar = ref(false)
+let itemDropDownMenuSidebar = ref('no')
+let dropDownMenuSidebar = ref(false)
+
+const openDropDownMenuSidebar = (item) => {
+    if (itemDropDownMenuSidebar.value == item) {
+        dropDownMenuSidebar.value = !dropDownMenuSidebar
+    } else {
+        itemDropDownMenuSidebar.value = item
+        dropDownMenuSidebar.value = true
+    }
+}
 </script>
 
 <style scoped>
