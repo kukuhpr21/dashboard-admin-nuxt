@@ -2,7 +2,7 @@
     <div class="flex w-full h-auto lg:h-screen bg-gray-200">
         <div class="flex flex-row w-full m-3 bg-white drop-shadow-xl rounded-xl gap-2">
             <!-- sidebar -->
-            <div :class="{ hidden: !openDrawer, 'flex w-2/3 lg:w-1/3': openDrawer}" class="flex-col rounded-tl-xl rounded-bl-xl duration-500">
+            <div :class="{ hidden: !openDrawer, 'flex w-full lg:w-1/3': openDrawer}" class="flex-col rounded-tl-xl rounded-bl-xl duration-500 z-10">
                 <div class="flex p-6 h-36 items-start lg:rounded-xl">
                     <div class="flex flex-row items-center gap-3">
                         <Logo :width="40" :height="40"/>
@@ -12,7 +12,7 @@
 
                 <!-- menu -->
                 <div class="flex flex-col h-screen sticky top-0 overflow-auto p-2">
-                    <div class="p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                    <div class="active p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
                         <i class='bx bxs-dashboard' ></i>
                         <span class="text-base ml-4 text-black">Dashboard</span>
                     </div>
@@ -77,19 +77,19 @@
 
                 <!-- sidebar -->
             </div>
-            <div :class="{'rounded-xl': !openDrawer, 'lg:rounded-tr-xl lg:rounded-br-xl': openDrawer}" class="flex flex-col h-auto w-full bg-slate-100 p-6">
+            <div :class="{'rounded-xl w-full': !openDrawer, 'w-fit lg:w-full lg:rounded-tr-xl lg:rounded-br-xl': openDrawer}" class="flex flex-col h-auto bg-slate-100 p-6">
                 <!-- navbar -->
                 <div class="flex flex-row h-11 items-center justify-between">
-                    <div class="flex h-full items-center">
-                        <svg @click="openDrawer = !openDrawer" class="cursor-pointer" width="26" height="26" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <div @click="openDrawer = !openDrawer" class="cursor-pointer flex h-full items-center px-2 hover:rounded-md hover:drop-shadow-xl hover:bg-slate-200">
+                        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17 10H3"></path>
                             <path d="M21 6H3"></path>
                             <path d="M21 14H3"></path>
                             <path d="M17 18H3"></path>
                         </svg>
                     </div>
-                    <div class="flex relative h-full items-center">
-                        <div @click="openDropdownMenuNavbar = !openDropdownMenuNavbar" class="cursor-pointer flex h-10 w-10 rounded-full border-2 border-slate-200 bg-white items-center justify-center">
+                    <div :class="{'hidden lg:flex': openDrawer, 'flex': !openDrawer}" class="flex relative h-full items-center">
+                        <div @click="openDropdownMenuNavbar = false" @click="openDropdownMenuNavbar = !openDropdownMenuNavbar" class="cursor-pointer flex h-10 w-10 rounded-full border-2 border-slate-200 bg-white items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
                                 <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path>
                             </svg>
@@ -103,7 +103,7 @@
                 <!-- navbar -->
 
                 <!-- body -->
-                <div class="flex flex-col p-4 my-3 h-auto lg:h-screen rounded-xl bg-white overflow-auto">
+                <div :class="{'hidden lg:flex': openDrawer, 'flex': !openDrawer}" class="flex flex-col p-4 my-3 h-auto lg:h-screen rounded-xl bg-white overflow-auto">
                     <div class="flex px-3 py-4">
                         <span class="text-black text-lg font-semibold">Dashboard</span>
                     </div>
@@ -159,5 +159,7 @@ const rotateDropDown = (item) => {
 </script>
 
 <style scoped>
-
+.active {
+    @apply bg-slate-300
+}
 </style>
