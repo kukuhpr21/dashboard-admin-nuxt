@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- menu -->
-                <div class="flex flex-col h-auto p-2">
+                <div class="flex flex-col h-screen sticky top-0 overflow-auto p-2">
                     <div class="p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
                         <i class='bx bxs-dashboard' ></i>
                         <span class="text-base ml-4 text-black">Dashboard</span>
@@ -21,7 +21,9 @@
                             <i class='bx bxs-chevron-right'></i>
                             <div class="flex justify-between w-full items-center">
                                 <span class="text-base ml-4 text-black">Management</span>
-                                <i class='bx bxs-chevron-up'></i>
+                                <span :class="{ 'rotate-0': !rotateDropDown('management'), 'rotate-180': rotateDropDown('management')}">
+                                    <i class='bx bxs-chevron-up'></i>
+                                </span>
                             </div>
                         </div>
                         <template v-if="itemDropDownMenuSidebar == 'management'">
@@ -37,7 +39,7 @@
                             <i class='bx bxs-chevron-right'></i>
                             <div class="flex justify-between w-full items-center">
                                 <span class="text-base ml-4 text-black">System</span>
-                                <span :class="{ 'rotate-0': !dropDownMenuSidebar, 'rotate-180': dropDownMenuSidebar}">
+                                <span :class="{ 'rotate-0': !rotateDropDown('system'), 'rotate-180': rotateDropDown('system')}">
                                     <i class='bx bxs-chevron-up'></i>
                                 </span>
                             </div>
@@ -49,6 +51,26 @@
                                 <h1 class="p-3 rounded-md text-base m-3 text-black cursor-pointer bg-slate-200 hover:drop-shadow-md">Permission</h1>
                             </div>
                         </template>
+                    </div>
+                    <div class="p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                        <i class='bx bxs-chevron-right'></i>
+                        <span class="text-base ml-4 text-black">Menu A</span>
+                    </div>
+                    <div class="p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                        <i class='bx bxs-chevron-right'></i>
+                        <span class="text-base ml-4 text-black">Menu B</span>
+                    </div>
+                    <div class="p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                        <i class='bx bxs-chevron-right'></i>
+                        <span class="text-base ml-4 text-black">Menu C</span>
+                    </div>
+                    <div class="p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                        <i class='bx bxs-chevron-right'></i>
+                        <span class="text-base ml-4 text-black">Menu D</span>
+                    </div>
+                    <div class="p-3 m-2 flex items-center rounded-md duration-300 cursor-pointer bg-slate-100 hover:drop-shadow-md">
+                        <i class='bx bxs-chevron-right'></i>
+                        <span class="text-base ml-4 text-black">Menu E</span>
                     </div>
                 </div>
                 <!-- menu -->
@@ -81,12 +103,12 @@
                 <!-- navbar -->
 
                 <!-- body -->
-                <div class="flex flex-col p-4 my-3 h-auto lg:h-screen rounded-xl bg-white">
+                <div class="flex flex-col p-4 my-3 h-auto lg:h-screen rounded-xl bg-white overflow-auto">
                     <div class="flex px-3 py-4">
                         <span class="text-black text-lg font-semibold">Dashboard</span>
                     </div>
                     <div class="flex flex-wrap gap-11">
-                        <div v-for="n in 5" class="flex flex-col w-full lg:w-40 h-40 p-3 bg-slate-100 rounded-xl justify-between">
+                        <div v-for="n in 5" class="flex flex-col w-full lg:w-40 h-40 p-3 bg-slate-100 rounded-xl justify-between hover:bg-slate-200 hover:drop-shadow-lg">
                             <div class="flex flex-row justify-between">
                                 <svg width="26" height="26" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17 9V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
@@ -120,10 +142,18 @@ let dropDownMenuSidebar = ref(false)
 
 const openDropDownMenuSidebar = (item) => {
     if (itemDropDownMenuSidebar.value == item) {
-        dropDownMenuSidebar.value = !dropDownMenuSidebar
+        dropDownMenuSidebar.value = !dropDownMenuSidebar.value
     } else {
         itemDropDownMenuSidebar.value = item
         dropDownMenuSidebar.value = true
+    }
+}
+
+const rotateDropDown = (item) => {
+    if (itemDropDownMenuSidebar.value == item) {
+        return dropDownMenuSidebar.value
+    } else {
+        return false
     }
 }
 </script>
