@@ -8,6 +8,8 @@
 
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+body {
+    font-family: 'Open Sans';
+}
 </style>

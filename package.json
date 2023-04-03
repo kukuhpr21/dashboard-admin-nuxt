@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.12",
+    "@nuxtjs/google-fonts": "^3.0.0",
     "boxicons": "^2.1.4"
   }
 }
